@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Contratações - EDUNET</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<main class="plans">
+    <div class="container narrow">
+
+        <div class="section-header">
+            <h1 class="section-title">Minha Conta</h1>
+            <p class="section-description">Acompanhe seus planos e fale com o suporte.</p>
+        </div>
+
+        <div id="aviso" class="form-message hidden" role="alert"></div>
+
+        <section class="panel" aria-labelledby="tituloContratacoes">
+            <h2 id="tituloContratacoes">Minhas contratações</h2>
+            <div id="listaContratacoes" aria-live="polite">Carregando...</div>
+        </section>
+
+        <section class="panel" aria-labelledby="tituloSuporte">
+            <h2 id="tituloSuporte">Suporte</h2>
+
+            <form id="formChamado" novalidate>
+                <div class="form-group">
+                    <label for="assunto">Assunto *</label>
+                    <input type="text" id="assunto" maxlength="100" placeholder="Ex.: Internet lenta">
+                </div>
+                <div class="form-group">
+                    <label for="descricao">Descreva o problema * (mínimo 10 caracteres)</label>
+                    <textarea id="descricao" rows="4" maxlength="500"></textarea>
+                </div>
+                <button type="submit" class="btn-primary" id="btnChamado">Abrir chamado</button>
+            </form>
+
+            <h3 class="subtitulo">Meus chamados</h3>
+            <div id="listaChamados" aria-live="polite">Carregando...</div>
+        </section>
+
+        <br>
+        <a href="#" onclick="irParaPagina('index.html')" class="btn-outline voltar-btn">
+            Voltar ao Site
+        </a>
+
+    </div>
+</main>
+
+<script src="api.js"></script>
+<script>
+    function irParaPagina(pagina) {
+        document.body.classList.add("fade-out");
+        setTimeout(() => { window.location.href = pagina; }, 350);
+    }
+
+    const aviso = document.getElementById("aviso");
+
+    function cartaoContratacao(c) {
+        const ativa = c.status === "Ativa";
+        return el("div", { class: "item" },
+            el("div", { class: "item-head" },
+                el("strong", {}, c.plano.nomePlano + " - " + velocidadeTexto(c.plano.velocidadeMbps)),
+                badgeStatus(c.status)),
+            el("p", {}, precoTexto(c.plano.preco) + " /mês"),
+            el("p", {}, "Instalação: " + c.endereco),
+            el("p", {}, "Contratado em " + dataTexto(c.dataContratacao)),
+            c.dataCancelamento ? el("p", {}, "Cancelado em " + dataTexto(c.dataCancelamento)) : null,
+            ativa ? el("button", { type: "button", class: "btn-danger", onclick: () => cancelar(c) }, "Cancelar plano") : null);
+    }
+
+    async function carregarContratacoes() {
+        const alvo = document.getElementById("listaContratacoes");
+        try {
+            const lista = await api("/api/contratacoes/minhas");
+            if (!lista.length) {
+                alvo.replaceChildren(el("p", {}, "Você ainda não contratou nenhum plano. "),
+                    el("a", { href: "planos.html", class: "btn-primary btn-inline" }, "Ver planos"));
+                return;
+            }
+            alvo.replaceChildren(...lista.map(cartaoContratacao));
+        } catch (erro) {
+            alvo.replaceChildren();
+            mostrarAviso(aviso, erro.message, "error");
+            if (!Auth.logado()) setTimeout(() => exigirLogin("solicitacoes.html"), 1200);
+        }
+    }
+
+    async function cancelar(c) {
+        if (!confirm("Deseja cancelar o plano " + c.plano.nomePlano + "?")) return;
+        try {
+            await api("/api/contratacoes/" + c.idContratacao + "/cancelar", { method: "POST" });
+            mostrarAviso(aviso, "Plano cancelado.", "success");
+            carregarContratacoes();
+        } catch (erro) {
+            mostrarAviso(aviso, erro.message, "error");
+        }
+    }
+
+    async function carregarChamados() {
+        const alvo = document.getElementById("listaChamados");
+        try {
+            const lista = await api("/api/chamados/meus");
+            if (!lista.length) { alvo.replaceChildren(el("p", {}, "Nenhum chamado aberto.")); return; }
+            alvo.replaceChildren(...lista.map(ch =>
+                el("div", { class: "item" },
+                    el("div", { class: "item-head" }, el("strong", {}, ch.assunto), badgeStatus(ch.status)),
+                    el("p", {}, ch.descricao),
+                    el("p", { class: "mutado" }, "Aberto em " + dataTexto(ch.dataAbertura)))));
+        } catch (erro) {
+            alvo.replaceChildren();
+        }
+    }
+
+    document.getElementById("formChamado").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const assunto = document.getElementById("assunto").value.trim();
+        const descricao = document.getElementById("descricao").value.trim();
+        if (assunto.length < 3) return mostrarAviso(aviso, "Informe o assunto do chamado.", "error");
+        if (descricao.length < 10) return mostrarAviso(aviso, "Descreva o problema com pelo menos 10 caracteres.", "error");
+
+        const botao = document.getElementById("btnChamado");
+        botao.disabled = true;
+        try {
+            const r = await api("/api/chamados", { method: "POST", body: { assunto, descricao } });
+            mostrarAviso(aviso, r.mensagem || "Chamado aberto.", "success");
+            e.target.reset();
+            carregarChamados();
+        } catch (erro) {
+            mostrarAviso(aviso, erro.message, "error");
+        } finally {
+            botao.disabled = false;
+        }
+    });
+
+    if (exigirLogin("solicitacoes.html")) {
+        carregarContratacoes();
+        carregarChamados();
+    }
+</script>
+
+</body>
+</html>

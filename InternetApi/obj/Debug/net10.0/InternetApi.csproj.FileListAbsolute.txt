@@ -1,0 +1,146 @@
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\appsettings.Development.json
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\appsettings.json
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\InternetApi.staticwebassets.endpoints.json
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\InternetApi.exe
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\InternetApi.deps.json
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\InternetApi.runtimeconfig.json
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\InternetApi.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\InternetApi.pdb
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Azure.Core.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Azure.Identity.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.Data.SqlClient.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.Identity.Client.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.OpenApi.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.SqlServer.Server.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\System.ClientModel.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\System.Configuration.ConfigurationManager.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\System.Drawing.Common.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\System.Memory.Data.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\System.Runtime.Caching.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\System.Security.Permissions.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\System.Windows.Extensions.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.csproj.AssemblyReference.cache
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.AssemblyInfoInputs.cache
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.AssemblyInfo.cs
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.csproj.CoreCompileInputs.cache
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\rjimswa.dswa.cache.json
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\scopedcss\bundle\InternetApi.styles.css
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\staticwebassets.build.json
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\staticwebassets.build.json.cache
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\staticwebassets.development.json
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\staticwebassets.build.endpoints.json
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\swae.build.ex.cache
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\Internet.28059BE4.Up2Date
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\refint\InternetApi.dll
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.pdb
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.genruntimeconfig.cache
+C:\Users\João Vitor\Documents\Edunet\InternetApi\obj\Debug\net10.0\ref\InternetApi.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\appsettings.Development.json
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\appsettings.json
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\InternetApi.staticwebassets.endpoints.json
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\InternetApi.exe
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\InternetApi.deps.json
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\InternetApi.runtimeconfig.json
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\InternetApi.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\InternetApi.pdb
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Azure.Core.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Azure.Identity.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.AspNetCore.OpenApi.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.Data.SqlClient.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.Identity.Client.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.OpenApi.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.SqlServer.Server.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\Microsoft.Win32.SystemEvents.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\System.ClientModel.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\System.Configuration.ConfigurationManager.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\System.Drawing.Common.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\System.IdentityModel.Tokens.Jwt.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\System.Memory.Data.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\System.Runtime.Caching.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\System.Security.Cryptography.ProtectedData.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\System.Security.Permissions.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\System.Windows.Extensions.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\dev\Edunet\InternetApi\bin\Debug\net10.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.csproj.AssemblyReference.cache
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.AssemblyInfoInputs.cache
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.AssemblyInfo.cs
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.csproj.CoreCompileInputs.cache
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.MvcApplicationPartsAssemblyInfo.cs
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.MvcApplicationPartsAssemblyInfo.cache
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\rjimswa.dswa.cache.json
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\scopedcss\bundle\InternetApi.styles.css
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\staticwebassets.build.json
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\staticwebassets.build.json.cache
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\staticwebassets.development.json
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\staticwebassets.build.endpoints.json
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\swae.build.ex.cache
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\Internet.28059BE4.Up2Date
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.dll
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\refint\InternetApi.dll
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.pdb
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\InternetApi.genruntimeconfig.cache
+C:\dev\Edunet\InternetApi\obj\Debug\net10.0\ref\InternetApi.dll

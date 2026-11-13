@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - EDUNET</title>
+
+  <style>
+    *{ margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
+
+    body{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(135deg,#0f172a,#1e3a8a,#2563eb);
+      overflow:auto;
+      padding:16px;
+    }
+
+    .container{
+      width:380px;
+      background:rgba(255,255,255,0.1);
+      backdrop-filter:blur(15px);
+      border:1px solid rgba(255,255,255,0.2);
+      border-radius:20px;
+      padding:40px 30px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.3);
+      color:white;
+      animation:fade 0.7s ease;
+    }
+
+    @keyframes fade{
+      from{ opacity:0; transform:translateY(20px); }
+      to{ opacity:1; transform:translateY(0); }
+    }
+
+    h2{ text-align:center; margin-bottom:30px; font-size:32px; }
+
+    .input-box{ position:relative; margin-bottom:20px; }
+
+    .input-box input{
+      width:100%;
+      padding:14px;
+      border:none;
+      outline:none;
+      border-radius:10px;
+      background:rgba(255,255,255,0.15);
+      color:white;
+      font-size:15px;
+      transition:0.3s;
+    }
+
+    .input-box input::placeholder{ color:#ddd; }
+    .input-box input:focus{ background:rgba(255,255,255,0.25); transform:scale(1.02); }
+
+    button{
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius:10px;
+      background:white;
+      color:#1e3a8a;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+      margin-top:10px;
+    }
+
+    button:hover{ background:#dbeafe; transform:translateY(-2px); }
+    button:disabled{ opacity:.6; cursor:wait; transform:none; }
+
+    .link{ text-align:center; margin-top:20px; cursor:pointer; color:#bfdbfe; transition:0.3s; }
+    .link:hover, .link:focus{ color:white; text-decoration:underline; }
+
+    .hidden{ display:none; }
+    .logo{ text-align:center; font-size:50px; margin-bottom:15px; }
+    .subtitle{ text-align:center; color:#dbeafe; margin-bottom:25px; font-size:14px; }
+
+    .msg{
+      margin-top:14px;
+      padding:12px;
+      border-radius:10px;
+      font-size:14px;
+      font-weight:bold;
+      text-align:center;
+    }
+    .msg.error{ background:#fee2e2; color:#991b1b; }
+    .msg.success{ background:#d1fae5; color:#065f46; }
+
+    :focus-visible{ outline:3px solid #f59e0b; outline-offset:2px; }
+
+    @media(max-width:450px){
+      .container{ width:100%; padding:30px 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <form id="loginForm" novalidate>
+      <div class="logo" aria-hidden="true">🔐</div>
+      <h2>Login</h2>
+      <div class="subtitle">Entre na sua conta</div>
+
+      <div class="input-box">
+        <input type="email" id="loginEmail" placeholder="Digite seu e-mail" aria-label="E-mail" autocomplete="email" required>
+      </div>
+
+      <div class="input-box">
+        <input type="password" id="loginSenha" placeholder="Digite sua senha" aria-label="Senha" autocomplete="current-password" required>
+      </div>
+
+      <button type="submit" id="btnEntrar">Entrar</button>
+
+      <div class="link" role="button" tabindex="0" onclick="mostrarCadastro()">
+        Não possui conta? Cadastre-se
+      </div>
+    </form>
+
+    <form id="cadastroForm" class="hidden" novalidate>
+      <div class="logo" aria-hidden="true">👤</div>
+      <h2>Cadastro</h2>
+      <div class="subtitle">Crie sua conta agora</div>
+
+      <div class="input-box">
+        <input type="text" id="cadNome" placeholder="Nome completo" aria-label="Nome completo" autocomplete="name" required>
+      </div>
+
+      <div class="input-box">
+        <input type="email" id="cadEmail" placeholder="Digite seu e-mail" aria-label="E-mail" autocomplete="email" required>
+      </div>
+
+      <div class="input-box">
+        <input type="password" id="cadSenha" placeholder="Senha (mínimo 6 caracteres)" aria-label="Senha" autocomplete="new-password" required>
+      </div>
+
+      <div class="input-box">
+        <input type="password" id="cadConfirmarSenha" placeholder="Confirmar senha" aria-label="Confirmar senha" autocomplete="new-password" required>
+      </div>
+
+      <button type="submit" id="btnCadastrar">Cadastrar</button>
+
+      <div class="link" role="button" tabindex="0" onclick="mostrarLogin()">
+        Já possui conta? Fazer login
+      </div>
+    </form>
+
+    <div id="msg" class="msg hidden" role="alert"></div>
+
+  </main>
+
+  <script src="api.js"></script>
+  <script>
+    const msg = document.getElementById("msg");
+
+    function aviso(texto, tipo) { mostrarAviso(msg, texto, tipo); }
+
+    function mostrarCadastro() {
+      msg.classList.add("hidden");
+      document.getElementById("loginForm").classList.add("hidden");
+      document.getElementById("cadastroForm").classList.remove("hidden");
+    }
+
+    function mostrarLogin() {
+      msg.classList.add("hidden");
+      document.getElementById("cadastroForm").classList.add("hidden");
+      document.getElementById("loginForm").classList.remove("hidden");
+    }
+
+    // Os "links" funcionam tambem com teclado (Enter)
+    document.querySelectorAll(".link").forEach(l =>
+      l.addEventListener("keydown", e => { if (e.key === "Enter") l.click(); }));
+
+    function entrar(dados) {
+      Auth.salvar(dados.token, dados.usuario);
+      let destino = null;
+      try { destino = sessionStorage.getItem("voltarPara"); sessionStorage.removeItem("voltarPara"); } catch { }
+      window.location.href = dados.usuario.perfil === "Admin" ? "admin.html" : (destino || "index.html");
+    }
+
+    function emailValido(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+    document.getElementById("cadastroForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const nome = document.getElementById("cadNome").value.trim();
+      const email = document.getElementById("cadEmail").value.trim();
+      const senha = document.getElementById("cadSenha").value;
+      const confirmar = document.getElementById("cadConfirmarSenha").value;
+
+      if (nome.length < 3) return aviso("Informe seu nome completo.", "error");
+      if (!emailValido(email)) return aviso("Informe um e-mail válido.", "error");
+      if (senha.length < 6) return aviso("A senha deve ter pelo menos 6 caracteres.", "error");
+      if (senha !== confirmar) return aviso("As senhas não coincidem.", "error");
+
+      const botao = document.getElementById("btnCadastrar");
+      botao.disabled = true;
+      try {
+        const dados = await api("/api/auth/register", { method: "POST", auth: false, body: { nome, email, senha } });
+        entrar(dados); // ja entra logado apos cadastrar
+      } catch (erro) {
+        aviso(erro.message, "error");
+        botao.disabled = false;
+      }
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById("loginEmail").value.trim();
+      const senha = document.getElementById("loginSenha").value;
+
+      if (!emailValido(email)) return aviso("Informe um e-mail válido.", "error");
+      if (!senha) return aviso("Informe sua senha.", "error");
+
+      const botao = document.getElementById("btnEntrar");
+      botao.disabled = true;
+      try {
+        const dados = await api("/api/auth/login", { method: "POST", auth: false, body: { email, senha } });
+        entrar(dados);
+      } catch (erro) {
+        aviso(erro.message, "error");
+        botao.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planos - EDUNET</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<main id="planos" class="plans">
+    <div class="container">
+
+        <div class="section-header">
+            <h1 class="section-title">Escolha Seu Plano Ideal</h1>
+            <p class="section-description">
+                Todos os planos incluem fibra óptica, sem fidelidade e instalação grátis.
+            </p>
+        </div>
+
+        <div id="aviso" class="form-message hidden" role="alert"></div>
+
+        <div id="listaPlanos" class="plans-grid" aria-live="polite">
+            <p>Carregando planos...</p>
+        </div>
+
+        <div class="plans-disclaimer">
+            <p>* Valores promocionais para novos clientes.</p>
+        </div>
+
+        <br><br>
+
+        <a href="#" onclick="irParaPagina('index.html')" class="btn-outline voltar-btn">
+            Voltar ao Site
+        </a>
+
+    </div>
+</main>
+
+<dialog id="dlgContratar" aria-labelledby="dlgTitulo">
+    <form id="formContratar" novalidate>
+        <h2 id="dlgTitulo">Confirmar contratação</h2>
+        <p id="dlgResumo" class="dlg-resumo"></p>
+
+        <div class="form-group">
+            <label for="endereco">Endereço de instalação *</label>
+            <input type="text" id="endereco" maxlength="200" placeholder="Rua, número, bairro, cidade" autocomplete="street-address">
+        </div>
+
+        <div id="erroDlg" class="form-message hidden" role="alert"></div>
+
+        <div class="dlg-botoes">
+            <button type="button" class="btn-outline" id="btnCancelarDlg">Cancelar</button>
+            <button type="submit" class="btn-primary" id="btnConfirmar">Confirmar contratação</button>
+        </div>
+    </form>
+</dialog>
+
+<script src="api.js"></script>
+<script>
+    function irParaPagina(pagina) {
+        document.body.classList.add("fade-out");
+        setTimeout(() => { window.location.href = pagina; }, 350);
+    }
+
+    let planoSelecionado = null;
+    const dlg = document.getElementById("dlgContratar");
+    const erroDlg = document.getElementById("erroDlg");
+
+    function cartao(p, popular) {
+        return el("div", { class: "plan-card" + (popular ? " plan-popular" : "") },
+            popular ? el("div", { class: "popular-badge" }, "Mais Popular") : null,
+            el("div", { class: "plan-header" },
+                el("h2", { class: "plan-name" }, p.nomePlano),
+                el("div", { class: "plan-speed" }, velocidadeTexto(p.velocidadeMbps)),
+                el("div", { class: "plan-price" },
+                    el("span", { class: "price-value" }, precoTexto(p.preco)),
+                    el("span", { class: "price-period" }, "/mês"))),
+            el("ul", { class: "plan-features" },
+                el("li", {}, "✔ " + (p.descricao || "Fibra óptica")),
+                el("li", {}, "✔ Download e upload simétricos"),
+                el("li", {}, "✔ Instalação grátis"),
+                el("li", {}, "✔ Sem fidelidade"),
+                el("li", {}, "✔ Suporte técnico 24h")),
+            el("button", {
+                type: "button",
+                class: "btn-plan" + (popular ? " btn-plan-popular" : ""),
+                "aria-label": "Assinar o plano " + p.nomePlano,
+                onclick: () => abrirContratacao(p)
+            }, "Assinar Agora"));
+    }
+
+    async function carregarPlanos() {
+        const lista = document.getElementById("listaPlanos");
+        try {
+            const planos = await api("/api/planos", { auth: false });
+            if (!planos.length) { lista.replaceChildren(el("p", {}, "Nenhum plano disponível no momento.")); return; }
+            lista.replaceChildren(...planos.map((p, i) => cartao(p, planos.length >= 3 && i === 1)));
+        } catch (erro) {
+            lista.replaceChildren();
+            mostrarAviso(document.getElementById("aviso"), erro.message, "error");
+        }
+    }
+
+    function abrirContratacao(plano) {
+        if (!exigirLogin("planos.html")) return;
+        planoSelecionado = plano;
+        document.getElementById("dlgResumo").textContent =
+            plano.nomePlano + " - " + velocidadeTexto(plano.velocidadeMbps) + " - " + precoTexto(plano.preco) + "/mês";
+        document.getElementById("endereco").value = "";
+        erroDlg.classList.add("hidden");
+        dlg.showModal();
+        document.getElementById("endereco").focus();
+    }
+
+    document.getElementById("btnCancelarDlg").addEventListener("click", () => dlg.close());
+
+    document.getElementById("formContratar").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const endereco = document.getElementById("endereco").value.trim();
+        if (endereco.length < 8) return mostrarAviso(erroDlg, "Informe o endereço completo (mínimo 8 caracteres).", "error");
+
+        const botao = document.getElementById("btnConfirmar");
+        botao.disabled = true;
+        try {
+            await api("/api/contratacoes", { method: "POST", body: { idPlano: planoSelecionado.idPlano, endereco } });
+            window.location.href = "solicitacoes.html";
+        } catch (erro) {
+            mostrarAviso(erroDlg, erro.message, "error");
+            botao.disabled = false;
+            if (!Auth.logado()) window.location.href = "login.html";
+        }
+    });
+
+    carregarPlanos();
+</script>
+
+</body>
+</html>

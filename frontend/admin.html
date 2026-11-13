@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração - EDUNET</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon" aria-hidden="true">📶</div>
+                <span class="logo-text">EDUNET Admin</span>
+            </div>
+            <div class="admin-topo">
+                <a href="index.html" class="nav-link">Site</a>
+                <button type="button" class="btn-primary" id="btnSair">Sair</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="page">
+    <div class="container">
+
+        <h1 class="section-title tit-admin">Painel administrativo</h1>
+
+        <div id="aviso" class="form-message hidden" role="alert"></div>
+
+        <div class="tabs" role="tablist">
+            <button type="button" class="tab ativa" role="tab" data-tab="resumo">Resumo</button>
+            <button type="button" class="tab" role="tab" data-tab="planos">Planos</button>
+            <button type="button" class="tab" role="tab" data-tab="chamados">Chamados</button>
+            <button type="button" class="tab" role="tab" data-tab="contatos">Contatos</button>
+        </div>
+
+        <!-- RESUMO -->
+        <section id="tab-resumo" class="painel-aba">
+            <div id="cardsResumo" class="cards-resumo"></div>
+            <div class="panel">
+                <h2>Planos mais contratados</h2>
+                <div id="rankingPlanos"></div>
+            </div>
+        </section>
+
+        <!-- PLANOS -->
+        <section id="tab-planos" class="painel-aba hidden">
+            <div class="panel">
+                <h2 id="tituloFormPlano">Novo plano</h2>
+                <form id="formPlano" novalidate>
+                    <input type="hidden" id="planoId">
+                    <div class="grade-form">
+                        <div class="form-group">
+                            <label for="planoNome">Nome *</label>
+                            <input type="text" id="planoNome" maxlength="60">
+                        </div>
+                        <div class="form-group">
+                            <label for="planoVel">Velocidade (Mbps) *</label>
+                            <input type="number" id="planoVel" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="planoPreco">Preço (R$) *</label>
+                            <input type="number" id="planoPreco" min="0.01" step="0.01">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="planoDesc">Descrição</label>
+                        <input type="text" id="planoDesc" maxlength="300">
+                    </div>
+                    <div class="form-group check">
+                        <input type="checkbox" id="planoAtivo" checked>
+                        <label for="planoAtivo">Plano ativo (aparece no site e no app)</label>
+                    </div>
+                    <button type="submit" class="btn-primary">Salvar plano</button>
+                    <button type="button" class="btn-outline" id="btnNovoPlano">Limpar</button>
+                </form>
+            </div>
+            <div class="panel">
+                <h2>Planos cadastrados</h2>
+                <div id="tabelaPlanos" class="tabela-wrap"></div>
+            </div>
+        </section>
+
+        <!-- CHAMADOS -->
+        <section id="tab-chamados" class="painel-aba hidden">
+            <div class="panel">
+                <h2>Chamados de suporte</h2>
+                <div id="tabelaChamados" class="tabela-wrap"></div>
+            </div>
+        </section>
+
+        <!-- CONTATOS -->
+        <section id="tab-contatos" class="painel-aba hidden">
+            <div class="panel">
+                <h2>Mensagens do formulário de contato</h2>
+                <div id="tabelaContatos" class="tabela-wrap"></div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+<script src="api.js"></script>
+<script>
+    /* Protecao de tela: a seguranca real esta na API ([Authorize(Roles="Admin")]); aqui so evitamos mostrar a tela. */
+    if (!Auth.admin()) {
+        try { sessionStorage.setItem("voltarPara", "admin.html"); } catch { }
+        window.location.href = Auth.logado() ? "index.html" : "login.html";
+    }
+
+    const aviso = document.getElementById("aviso");
+    const erro = (e) => mostrarAviso(aviso, e.message, "error");
+
+    document.getElementById("btnSair").addEventListener("click", () => { Auth.sair(); window.location.href = "login.html"; });
+
+    function tabela(colunas, linhas, vazio) {
+        if (!linhas.length) return el("p", {}, vazio);
+        return el("table", { class: "tabela" },
+            el("thead", {}, el("tr", {}, colunas.map(c => el("th", { scope: "col" }, c)))),
+            el("tbody", {}, linhas.map(l => el("tr", {}, l.map(c => el("td", {}, c))))));
+    }
+
+    /* ---------- Abas ---------- */
+    const carregadores = { resumo: carregarResumo, planos: carregarPlanos, chamados: carregarChamados, contatos: carregarContatos };
+
+    document.querySelectorAll(".tab").forEach(botao => botao.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(b => { b.classList.remove("ativa"); b.setAttribute("aria-selected", "false"); });
+        document.querySelectorAll(".painel-aba").forEach(p => p.classList.add("hidden"));
+        botao.classList.add("ativa");
+        botao.setAttribute("aria-selected", "true");
+        document.getElementById("tab-" + botao.dataset.tab).classList.remove("hidden");
+        aviso.classList.add("hidden");
+        carregadores[botao.dataset.tab]();
+    }));
+
+    /* ---------- Resumo ---------- */
+    async function carregarResumo() {
+        try {
+            const r = await api("/api/relatorios/resumo");
+            const itens = [["Clientes", r.totalClientes], ["Contratações ativas", r.contratacoesAtivas],
+                           ["Contatos recebidos", r.totalContatos], ["Chamados em aberto", r.chamadosAbertos]];
+            document.getElementById("cardsResumo").replaceChildren(...itens.map(([nome, valor]) =>
+                el("div", { class: "card-resumo" }, el("div", { class: "card-resumo-valor" }, valor), el("div", {}, nome))));
+
+            const ranking = await api("/api/relatorios/planos-mais-contratados");
+            const maior = Math.max(1, ...ranking.map(x => x.total));
+            document.getElementById("rankingPlanos").replaceChildren(...ranking.map(x =>
+                el("div", { class: "barra-linha" },
+                    el("span", { class: "barra-nome" }, x.nomePlano),
+                    el("div", { class: "barra-trilho" }, el("div", { class: "barra", style: "width:" + (x.total / maior * 100) + "%" })),
+                    el("span", { class: "barra-valor" }, x.total))));
+        } catch (e) { erro(e); }
+    }
+
+    /* ---------- Planos ---------- */
+    function limparFormPlano() {
+        document.getElementById("formPlano").reset();
+        document.getElementById("planoId").value = "";
+        document.getElementById("planoAtivo").checked = true;
+        document.getElementById("tituloFormPlano").textContent = "Novo plano";
+    }
+
+    function editarPlano(p) {
+        document.getElementById("planoId").value = p.idPlano;
+        document.getElementById("planoNome").value = p.nomePlano;
+        document.getElementById("planoVel").value = p.velocidadeMbps;
+        document.getElementById("planoPreco").value = p.preco;
+        document.getElementById("planoDesc").value = p.descricao || "";
+        document.getElementById("planoAtivo").checked = p.ativo;
+        document.getElementById("tituloFormPlano").textContent = "Editar plano #" + p.idPlano;
+        document.getElementById("planoNome").focus();
+    }
+
+    async function carregarPlanos() {
+        try {
+            const planos = await api("/api/planos/todos");
+            document.getElementById("tabelaPlanos").replaceChildren(tabela(
+                ["ID", "Nome", "Velocidade", "Preço", "Situação", ""],
+                planos.map(p => [p.idPlano, p.nomePlano, velocidadeTexto(p.velocidadeMbps), precoTexto(p.preco),
+                    el("span", { class: "badge " + (p.ativo ? "ok" : "off") }, p.ativo ? "Ativo" : "Inativo"),
+                    el("button", { type: "button", class: "btn-outline btn-mini", onclick: () => editarPlano(p) }, "Editar")]),
+                "Nenhum plano cadastrado."));
+        } catch (e) { erro(e); }
+    }
+
+    document.getElementById("btnNovoPlano").addEventListener("click", limparFormPlano);
+
+    document.getElementById("formPlano").addEventListener("submit", async (ev) => {
+        ev.preventDefault();
+        const id = document.getElementById("planoId").value;
+        const corpo = {
+            nomePlano: document.getElementById("planoNome").value.trim(),
+            velocidadeMbps: Number(document.getElementById("planoVel").value),
+            preco: Number(document.getElementById("planoPreco").value),
+            descricao: document.getElementById("planoDesc").value.trim() || null,
+            ativo: document.getElementById("planoAtivo").checked
+        };
+        if (!corpo.nomePlano) return mostrarAviso(aviso, "Informe o nome do plano.", "error");
+        if (!(corpo.velocidadeMbps > 0)) return mostrarAviso(aviso, "Informe a velocidade.", "error");
+        if (!(corpo.preco > 0)) return mostrarAviso(aviso, "Informe um preço maior que zero.", "error");
+
+        try {
+            await api(id ? "/api/planos/" + id : "/api/planos", { method: id ? "PUT" : "POST", body: corpo });
+            mostrarAviso(aviso, id ? "Plano atualizado." : "Plano criado.", "success");
+            limparFormPlano();
+            carregarPlanos();
+        } catch (e) { erro(e); }
+    });
+
+    /* ---------- Chamados ---------- */
+    async function mudarStatus(chamado, novo, seletor) {
+        try {
+            await api("/api/chamados/" + chamado.idChamado + "/status", { method: "PUT", body: { status: novo } });
+            mostrarAviso(aviso, "Chamado #" + chamado.idChamado + " atualizado.", "success");
+            carregarChamados();
+        } catch (e) { seletor.value = chamado.status; erro(e); }
+    }
+
+    async function carregarChamados() {
+        try {
+            const lista = await api("/api/chamados");
+            document.getElementById("tabelaChamados").replaceChildren(tabela(
+                ["#", "Usuário", "Assunto", "Descrição", "Aberto em", "Status"],
+                lista.map(c => {
+                    const sel = el("select", { "aria-label": "Status do chamado " + c.idChamado },
+                        ["Aberto", "EmAndamento", "Resolvido"].map(s =>
+                            el("option", { value: s, selected: s === c.status ? "" : null }, s === "EmAndamento" ? "Em andamento" : s)));
+                    sel.addEventListener("change", () => mudarStatus(c, sel.value, sel));
+                    return [c.idChamado, c.idUsuario, c.assunto, c.descricao, dataTexto(c.dataAbertura), sel];
+                }),
+                "Nenhum chamado registrado."));
+        } catch (e) { erro(e); }
+    }
+
+    /* ---------- Contatos ---------- */
+    async function carregarContatos() {
+        try {
+            const lista = await api("/api/contatos");
+            document.getElementById("tabelaContatos").replaceChildren(tabela(
+                ["#", "Nome", "E-mail", "Telefone", "Plano", "Mensagem", "Data"],
+                lista.map(c => [c.idContato, c.nome, c.email, c.telefone || "", c.idPlano || "", c.mensagem || "", dataTexto(c.dataEnvio)]),
+                "Nenhuma mensagem recebida."));
+        } catch (e) { erro(e); }
+    }
+
+    if (Auth.admin()) carregarResumo();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDUNET</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="header-content">
+
+            <div class="logo">
+                <div class="logo-icon">📶</div>
+                <span class="logo-text">EDUNET</span>
+            </div>
+
+            <nav class="nav-desktop">
+                <button onclick="scrollToSection('inicio')" class="nav-link">Início</button>
+                <button onclick="scrollToSection('recursos')" class="nav-link">Recursos</button>
+                <a href="#" onclick="irParaPagina('planos.html')" class="nav-link">Planos</a>
+                <button onclick="scrollToSection('contato')" class="nav-link">Contato</button>
+
+                <a href="#" onclick="irParaPagina('solicitacoes.html')" id="btnSolicitacoes" class="nav-link hidden">
+                    Minha Conta
+                </a>
+
+                <a href="#" onclick="irParaPagina('admin.html')" id="btnAdmin" class="nav-link hidden">
+                    Admin
+                </a>
+
+                <a href="login.html" id="btnLoginHeader" class="btn-primary">Login</a>
+            </nav>
+
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span class="menu-icon">☰</span>
+                <span class="close-icon hidden">✕</span>
+            </button>
+
+        </div>
+
+        <nav class="nav-mobile hidden">
+            <button onclick="scrollToSection('inicio')" class="nav-link-mobile">Início</button>
+            <button onclick="scrollToSection('recursos')" class="nav-link-mobile">Recursos</button>
+            <a href="#" onclick="irParaPagina('planos.html')" class="nav-link-mobile">Planos</a>
+            <button onclick="scrollToSection('contato')" class="nav-link-mobile">Contato</button>
+            <a href="login.html" class="btn-primary">Login</a>
+        </nav>
+    </div>
+</header>
+
+<section id="inicio" class="hero">
+    <div class="container">
+        <div class="hero-grid">
+
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Internet Ultra<span class="text-blue">Rápida</span> Para Sua Casa
+                </h1>
+
+                <p class="hero-description">
+                    Conexão de fibra óptica com velocidades de até 1 Gbps.
+                    Sem limites e sem interrupções.
+                </p>
+
+                <div class="hero-buttons">
+                    <button onclick="irParaPagina('planos.html')" class="btn-primary btn-lg">
+                        Ver Planos
+                    </button>
+
+                    <button onclick="scrollToSection('contato')" class="btn-outline btn-lg">
+                        Fale Conosco
+                    </button>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1606814540563-5c02d62fd409?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
+                     alt="Fibra Óptica">
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="recursos" class="features">
+    <div class="container">
+
+        <div class="section-header">
+            <h2 class="section-title">Por Que Escolher a EDUNET?</h2>
+            <p class="section-description">
+                Oferecemos internet rápida, estável e suporte especializado.
+            </p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3 class="feature-card-title">Fibra Óptica 100%</h3>
+                <p class="feature-card-description">Conexão direta por fibra óptica até sua casa.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3 class="feature-card-title">Sem Fidelidade</h3>
+                <p class="feature-card-description">Cancele quando quiser sem multas.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3 class="feature-card-title">Suporte 24h</h3>
+                <p class="feature-card-description">Atendimento técnico especializado todos os dias.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="contato" class="contact">
+    <div class="container">
+
+        <div class="section-header">
+            <h2 class="section-title">Entre em Contato</h2>
+            <p class="section-description">
+                Preencha o formulário e retornaremos em breve.
+            </p>
+        </div>
+
+        <div class="contact-grid">
+
+            <div class="contact-info">
+                <h3 class="contact-info-title">Fale Conosco</h3>
+
+                <div class="contact-items">
+                    <div class="contact-item">
+                        <div>
+                            <h4>Telefone</h4>
+                            <p>0800 123 4567</p>
+                            <p>(11) 98765-4321</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div>
+                            <h4>E-mail</h4>
+                            <p>contato@edunet.com.br</p>
+                            <p>suporte@edunet.com.br</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div>
+                            <h4>Endereço</h4>
+                            <p>Av. Paulista, 1000</p>
+                            <p>São Paulo - SP</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper">
+
+                <form id="contactForm" class="contact-form">
+
+                    <div class="form-group">
+                        <label for="name">Nome Completo *</label>
+                        <input type="text"
+                               id="name"
+                               required
+                               minlength="3"
+                               maxlength="100"
+                               placeholder="Seu nome">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail *</label>
+                        <input type="email"
+                               id="email"
+                               required
+                               placeholder="seu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Telefone *</label>
+                        <input type="tel"
+                               id="phone"
+                               required
+                               maxlength="15"
+                               placeholder="(11) 98765-4321">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="plan">Plano de Interesse *</label>
+                        <select id="plan" required>
+                            <option value="">Carregando planos...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message"
+                                  rows="4"
+                                  maxlength="300"
+                                  placeholder="Deixe sua mensagem..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        Enviar Mensagem
+                    </button>
+
+                </form>
+
+                <div id="formMessage" class="form-message hidden"></div>
+
+                <div id="successMessage" class="success-message hidden">
+                    <h3>Mensagem Enviada!</h3>
+                    <p>Obrigado pelo contato. Retornaremos em breve.</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2026 EDUNET. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<script src="api.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
